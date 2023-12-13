@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jguard</groupId>
+        <artifactId>jguard-clone-service</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>jguard-clone-processor</artifactId>
+
+    <properties>
+        <jgit.version>6.7.0.202309050840-r</jgit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jguard</groupId>
+            <artifactId>jguard-clone-domain</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>${jgit.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
