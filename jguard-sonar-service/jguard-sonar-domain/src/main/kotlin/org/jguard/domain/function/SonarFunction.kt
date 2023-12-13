@@ -1,8 +1,9 @@
 package org.jguard.domain.function
 
-import org.jguard.domain.model.SonarRequest
+import org.jguard.domain.model.request.SonarRequest
 import org.jguard.domain.model.issues.SonarIssuesResponse
-import org.jguard.domain.model.sonar.qube.response.SQTokenResponse
+import org.jguard.domain.model.response.SQCreateProjectResponse
+import org.jguard.domain.model.response.SQTokenResponse
 
 interface SonarFunction {
 
@@ -12,6 +13,6 @@ interface SonarFunction {
 
     fun generateToken(sonarRequest: SonarRequest): SQTokenResponse?
 
-    fun createProject(sonarRequest: SonarRequest): Int
+    fun createProject(sonarRequest: SonarRequest): SQCreateProjectResponse?
 
 }

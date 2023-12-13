@@ -2,11 +2,12 @@ package org.jguard.processor
 
 import org.jguard.client.SonarQubeClient
 import org.jguard.domain.function.SonarFunction
-import org.jguard.domain.model.SonarRequest
+import org.jguard.domain.model.request.SonarRequest
 import org.jguard.domain.model.issues.SonarIssuesResponse
+import org.jguard.domain.model.response.SQCreateProjectResponse
 import org.jguard.domain.model.sonar.qube.enums.Severity
-import org.jguard.domain.model.sonar.qube.response.SQIssuesResponse
-import org.jguard.domain.model.sonar.qube.response.SQTokenResponse
+import org.jguard.domain.model.response.SQIssuesResponse
+import org.jguard.domain.model.response.SQTokenResponse
 
 
 class SonarProcessor(private val sonarQubeClient: SonarQubeClient) : SonarFunction {
@@ -36,8 +37,8 @@ class SonarProcessor(private val sonarQubeClient: SonarQubeClient) : SonarFuncti
         return sonarQubeClient.generateToken(sonarRequest)
     }
 
-    override fun createProject(sonarRequest: SonarRequest): Int {
-        return sonarQubeClient.createProject(sonarRequest).value()
+    override fun createProject(sonarRequest: SonarRequest): SQCreateProjectResponse? {
+        return sonarQubeClient.createProject(sonarRequest)
     }
 
     private fun buildSonarIssueResponse(sqIssuesResponse: SQIssuesResponse): SonarIssuesResponse {

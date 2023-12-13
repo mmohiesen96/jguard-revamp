@@ -2,9 +2,11 @@ package org.jguard.controller.api
 
 import org.jguard.controller.contract.JguardSonarContract
 import org.jguard.domain.function.SonarFunction
-import org.jguard.domain.model.SonarRequest
 import org.jguard.domain.model.issues.SonarIssuesResponse
-import org.jguard.domain.model.sonar.qube.response.SQTokenResponse
+import org.jguard.domain.model.request.SonarRequest
+import org.jguard.domain.model.response.SQCreateProjectResponse
+import org.jguard.domain.model.response.SQProjectFinishedResponse
+import org.jguard.domain.model.response.SQTokenResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
@@ -16,11 +18,11 @@ class JguardSonarApiController(private val sonarFunction: SonarFunction) : Jguar
     ): ResponseEntity<SonarIssuesResponse> =
         ResponseEntity.ok(sonarFunction.retrieveIssues(sonarRequest))
 
-    override fun isProjectFinished(sonarRequest: SonarRequest): ResponseEntity<Boolean> =
-        ResponseEntity.ok(sonarFunction.isProjectFinished(sonarRequest))
+    override fun isProjectFinished(sonarRequest: SonarRequest): ResponseEntity<SQProjectFinishedResponse> =
+        ResponseEntity.ok(SQProjectFinishedResponse(sonarFunction.isProjectFinished(sonarRequest)))
 
-    override fun createProject(sonarRequest: SonarRequest): ResponseEntity<Boolean> =
-        ResponseEntity.status(sonarFunction.createProject(sonarRequest)).build()
+    override fun createProject(sonarRequest: SonarRequest): ResponseEntity<SQCreateProjectResponse> =
+        ResponseEntity.ok(sonarFunction.createProject(sonarRequest))
 
 
     override fun generateToken(sonarRequest: SonarRequest): ResponseEntity<SQTokenResponse> =

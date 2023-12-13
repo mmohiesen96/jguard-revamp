@@ -1,4 +1,4 @@
-package org.jguard.domain.model.sonar.qube.response
+package org.jguard.domain.model.response
 
 data class SQTokenResponse(
     val login: String,

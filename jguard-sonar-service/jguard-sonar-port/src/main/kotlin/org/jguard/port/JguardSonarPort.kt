@@ -6,6 +6,7 @@ import org.jguard.processor.SonarProcessor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.client.RestTemplate
+import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class JguardSonarPort {
@@ -16,12 +17,12 @@ class JguardSonarPort {
     }
 
     @Bean
-    fun restTemplate(): RestTemplate {
-        return RestTemplate()
+    fun webClient(): WebClient {
+        return WebClient.builder().build()
     }
 
     @Bean
     fun sonarQubeClient(): SonarQubeClient {
-        return SonarQubeClientRest(restTemplate())
+        return SonarQubeClientRest(webClient())
     }
 }

@@ -1,4 +1,4 @@
-package org.jguard.domain.model.sonar.qube.response
+package org.jguard.domain.model.response
 
 import org.jguard.domain.model.sonar.qube.data.Component
 import org.jguard.domain.model.sonar.qube.data.Issue
