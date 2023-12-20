@@ -1,0 +1,181 @@
+<sectionsDetails>
+    <sections>
+        <section key="a-xxxx" name="1) AB Standards">
+            <questions>
+                <question key="a-0010">Does the project (ABRepo project name) follow Naming Conventions ?
+                    Pattern: ab-&lt;Category/domain&gt;-&lt;application-name&gt;-&lt;tech stack&gt;-service
+                </question>
+                <question key="a-0020">Does the module follow naming conventions ?
+                    Pattern: &lt;Categroty/domain&gt;-&lt;application name&gt;-ms.
+                </question>
+                <question key="a-0030">Does latest Jenkins file exist ?</question>
+                <question key="a-0031">Does ".gitignore" file exist ?</question>
+                <question key="a-0040">Does VERSION file exist and match release number inside POM file ?</question>
+                <question key="a-0050">Does README file exist?</question>
+                <question key="a-0060">Does Logback file exist?</question>
+                <question key="a-0070">Is the resource bundle 'messages' defined as per microservice supported language
+                    ?
+                    Patterns: - messages_{language}.properties, - {ExceptionName}-MESSAGE
+                    - {ExceptionName}-SOURCE={MS Name} - {ExceptionName}-CODE={sequance code, three digites}
+                </question>
+                <question key="a-0080">Is AB packeges struture followed ?
+                    ex: - channel - > if kafka used. - configuration - constant - controller.rest
+                    - exceptions - model - repository - service - util
+                </question>
+                <question key="a-0090">Is Startup spring Class name "BootstrapApplication"</question>
+                <question key="a-0100">No logic inside startup spring Class</question>
+                <question key="a-0110">Are scan packages inside startup spring Class specified ?</question>
+                <question key="a-0120">Is RestController extend BaseController ?</question>
+                <question key="a-0130">Is RestController using custom annotations (@CommonArgs / @CommonApiOperation)?
+                </question>
+                <question key="a-0140">Does endpoints response follow AB structure
+                    Ex: SingularResponseTemplateDTO, ResponseTemplateDTO
+                </question>
+                <question key="a-0150">Does the microservice have single Module ?</question>
+                <question key="a-0160">Does the microservice mongo entities extend core AuditSchema?</question>
+            </questions>
+        </section>
+        <section key="b-xxxx" name="1.1) POM File" subSection="true">
+            <questions>
+                <question key="b-0010">Are the naming conventions for groupId followed as below:
+                    - All elements has to be in lower case. - Use the reverse of a domain name that can be used to
+                    identify your project.
+                    - Do not use two words into a single word by camel case. Pattern:
+                    com.arabbank.mircoservices.{domain}.{service name}
+                </question>
+                <question key="b-0020">Use SNAPSHOT versioning when it is under development.</question>
+                <question key="b-0030">For release, change the version of project POM files from SNAPSHOT to a concrete
+                    version number.
+                </question>
+                <question key="b-0040">Are all the dependencies in the microservice used ? Note: In order to find out
+                    unused dependencies,
+                    use "mvn dependency:analyze" [WARNING] Unused declared dependencies found: PLEASE MAKE SURE TO CHECK
+                    IF REMOVED DEPENDENCY NOT AFFECT THE CURRENT LOGIC.
+                </question>
+                <question key="b-0050">Is the latest Core versions used?</question>
+                <question key="b-0060">Is pl.project13.maven (build-info) Plugin used ?</question>
+            </questions>
+        </section>
+        <section key="c-xxxx" name="1.2) application.yml" subSection="true">
+            <questions>
+                <question key="c-0010">Does not contains plain credentials?</question>
+                <question key="c-0020">Does the context-path follow rest api naming convention ?
+                    Pattern:
+                    [participant-path-prefix]/open-banking/[version]/[resource-group]/[resource]/[resource-id]/[sub-resource]
+                    Refer to: https://standards.openbanking.org.uk/api-specifications
+                </question>
+                <question key="c-0030">Does the spring.application.name value match the artifactId ?
+                    Pattern: ab-&lt;Category/domain&gt;-&lt;application-name&gt;-&lt;tech stack&gt;-service
+                </question>
+                <question key="c-0040">Is Kafka group defined for all consumer bindings under stream tag?</question>
+                <question key="c-0050">Are persistence drivers excluded if not used ?
+                    Ex: - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration,
+                    - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+                    - org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration,
+                    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+                </question>
+                <question key="c-0060">Does the exception tag exist ?</question>
+                <question key="c-0070">Is logging tag level INFO ?
+                    org.springframework.cloud.kubernetes: ERROR
+                    org.springframework.data.mongodb.core.MongoTemplate: ERROR
+                </question>
+                <question key="c-0080">Does actuator APIs (health, info, Prometheus, metric and restart) exist ?
+                </question>
+                <question key="c-0090">Is Service code defined under config tag and exists on service catalog?
+                </question>
+            </questions>
+        </section>
+        <section key="d-xxxx" name="2) Clean Code">
+            <questions>
+                <question key="d-0010">High Cohesion and Loose Coupling</question>
+                <question key="d-0020">Design Patterns - (Single Responsibility Principle (SRP) and Don't Repeat
+                    Yourself
+                    (DRY))
+                </question>
+                <question key="d-0030">Are abstractions used properly</question>
+                <question key="d-0040">Does the code follow the Coding Convention?
+                    Note: Please follow rules under shared document "codeconventions-150003.pdf"
+                </question>
+                <question key="d-0050">Is the code self-documenting? Is it possible to understand the code from reading
+                    it?
+                </question>
+            </questions>
+        </section>
+        <section key="e-xxxx" name="3) Concurrency">
+            <questions>
+                <question key="e-0010">Does the code use executors instead of creating ad-hoc threads?</question>
+                <question key="e-0020">Is shared data immutable whenever possible?</question>
+                <question key="e-0030">Is access to mutable data synchronized?</question>
+                <question key="e-0040">Are non-blocking libraries used whenever needed (webflux, kotlin coroutines)
+                </question>
+            </questions>
+        </section>
+        <section key="f-xxxx" name="4) Reusability">
+            <questions>
+                <question key="f-0010">Are methods and libraries reused whenever possible?
+                    Note: Do not reinvent the wheels.
+                </question>
+            </questions>
+        </section>
+        <section key="g-xxxx" name="5) Performance">
+            <questions>
+                <question key="g-0010">Are resources releaseed after use? ex: (File Handles, db connections, etc)
+                </question>
+                <question key="g-0020">Is the time and memory complexity of the code minimized?</question>
+            </questions>
+        </section>
+        <section key="h-xxxx" name="6) Error Handling">
+            <questions>
+                <question key="h-0010">Is error handling for negative scenarios handled properly? Are Inputs validated
+                    before processing?
+                </question>
+                <question key="h-0020">Are checked and unchecked exceptions used properly?
+                    Note: (Checked exceptions for recoverable conditions and runtime exceptions for unrecoverable
+                    conditions)
+                </question>
+            </questions>
+        </section>
+        <section key="i-xxxx" name="7) Regression">
+            <questions>
+                <question key="i-0010">Does the change break backward compatability?
+                    EX: Versioning of endpoint!
+                </question>
+            </questions>
+        </section>
+        <section key="j-xxxx" name="8) Security">
+            <questions>
+                <question key="j-0010">Are OWASP standards followed?</question>
+                <question key="j-0020">The service does not log sensitive information or put them in query parameters
+                </question>
+            </questions>
+        </section>
+        <section key="k-xxxx" name="9) Inter service communication">
+            <questions>
+                <question key="k-0010">Is Service invocation failures handled?</question>
+                <question key="k-0020">Are Pub/Sub or event driven approaches used instead of synchronous communication
+                    whenever possible?
+                </question>
+                <question key="k-0030">Is feign client used if service consumed other rest service ?</question>
+                <question key="k-0040">Is adaptor used if service consumed Soap service</question>
+            </questions>
+        </section>
+        <section key="l-xxxx" name="10) General">
+            <questions>
+                <question key="l-0010">Does each operation have a name that describes what the operation does?
+                </question>
+                <question key="l-0020">Is the normal path through each operation, clearly distinguishable from other
+                    exceptional paths?
+                </question>
+                <question key="l-0030">Is nesting of loops minimized?</question>
+                <question key="l-0040">Do the parameters have descriptive names?</question>
+                <question key="l-0050">Is Scheduler Used ?</question>
+                <question key="l-0060">"Is the operation too long, and can it be simplified by reducing the number of
+                    decision points and
+                    extract private operations? (A decision point is a statement where the code can take different
+                    paths, for example, if-, else-, and-,
+                    while-, and case-statements.)"
+                </question>
+            </questions>
+        </section>
+    </sections>
+</sectionsDetails>
